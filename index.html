@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1220">
+  <title>Ali Bavarchee — Data Physicist & Machine Learning Engineer</title>
+  <meta name="description" content="Ali Bavarchee is a data physicist and machine learning engineer working on scientific machine learning, high-energy physics, detector data, and time-series forecasting.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ali Bavarchee — Data Physicist & Machine Learning Engineer">
+  <meta property="og:description" content="Scientific machine learning, high-energy physics, and reliable data-driven models.">
+  <link rel="icon" href="Ali_logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a1220;
+      --bg-soft: #0d1929;
+      --panel: #111f31;
+      --panel-hover: #15263b;
+      --line: rgba(180, 204, 230, .14);
+      --line-strong: rgba(95, 214, 207, .35);
+      --text: #f0f5fb;
+      --muted: #a9b8ca;
+      --subtle: #71849b;
+      --teal: #64ded2;
+      --blue: #8cbaff;
+      --amber: #ffca78;
+      --violet: #c6a8ff;
+      --radius: 20px;
+      --radius-sm: 13px;
+      --max-width: 1160px;
+      --nav-height: 76px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 20px); }
+    body {
+      min-width: 320px; margin: 0; color: var(--text); background: var(--bg);
+      font: 16px/1.7 "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background: radial-gradient(ellipse at 12% 0%, rgba(42, 143, 143, .18), transparent 35%),
+                  radial-gradient(ellipse at 95% 12%, rgba(92, 117, 204, .16), transparent 32%),
+                  linear-gradient(180deg, #0a1220, #0b1421 50%, #0a1220);
+    }
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .22;
+      background-image: linear-gradient(rgba(180,204,230,.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(180,204,230,.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    img, svg { display: block; }
+    img { max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1, h2, h3, h4 { font-family: "Space Grotesk", "DM Sans", sans-serif; line-height: 1.17; letter-spacing: -.035em; }
+    p { color: var(--muted); }
+    ::selection { color: #08131d; background: var(--teal); }
+    :focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
+    .skip-link { position: fixed; top: 8px; left: 8px; z-index: 2000; padding: 10px 14px; color: #07131b; background: var(--teal); border-radius: 8px; transform: translateY(-150%); }
+    .skip-link:focus { transform: translateY(0); }
+    .wrap { width: min(var(--max-width), calc(100% - 48px)); margin-inline: auto; }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 1200; width: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--blue), var(--amber)); }
+
+    /* Navigation */
+    .site-header { position: fixed; top: 0; inset-inline: 0; z-index: 1000; border-bottom: 1px solid transparent; transition: background .25s ease, border-color .25s ease; }
+    .site-header.scrolled { background: rgba(8, 17, 29, .9); border-bottom-color: var(--line); backdrop-filter: blur(18px); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--nav-height); }
+    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 180px; }
+    .brand img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 0 12px rgba(100,222,210,.18)); }
+    .brand-copy { display: grid; line-height: 1.25; }
+    .brand-name { font: 600 14px "Space Grotesk", sans-serif; letter-spacing: -.01em; }
+    .brand-role { margin-top: 3px; color: var(--subtle); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a { padding: 9px 12px; border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 600; transition: color .2s ease, background .2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(255,255,255,.065); }
+    .nav-links a.active { box-shadow: inset 0 -2px 0 var(--teal); }
+    .nav-links a.nav-contact { color: #07151f; background: var(--teal); padding-inline: 17px; }
+    .nav-links a.nav-contact:hover { background: #8bf0e7; }
+    .menu-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; color: var(--text); background: var(--panel); cursor: pointer; }
+    .menu-toggle svg { width: 21px; height: 21px; }
+
+    /* Shared section styles */
+    main { overflow: clip; }
+    section { position: relative; padding: 98px 0; }
+    .section-head { max-width: 720px; margin-bottom: 36px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 16px; color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: currentColor; }
+    .section-title { margin-bottom: 14px; font-size: clamp(2rem, 4vw, 3.05rem); }
+    .section-intro { max-width: 640px; margin-bottom: 0; font-size: 15.5px; }
+    .accent { color: var(--teal); }
+    .muted-label { color: var(--subtle); }
+    .surface { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.018)); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 20px; border: 1px solid transparent; border-radius: 999px; font-size: 14px; font-weight: 700; transition: transform .2s var(--ease), border-color .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #07151f; background: var(--teal); box-shadow: 0 10px 28px rgba(60, 191, 182, .14); }
+    .btn-primary:hover { background: #8bf0e7; }
+    .btn-secondary { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.025); }
+    .btn-secondary:hover { border-color: var(--line-strong); background: rgba(100,222,210,.06); }
+    .btn svg { width: 16px; height: 16px; flex: none; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { display: inline-flex; align-items: center; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: #c6d4e4; background: rgba(255,255,255,.025); font-size: 12px; line-height: 1.25; }
+
+    /* Hero */
+    .hero { display: flex; align-items: center; min-height: min(820px, 100svh); padding: calc(var(--nav-height) + 74px) 0 64px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); align-items: center; gap: clamp(36px, 6vw, 82px); }
+    .hero-kicker { display: flex; align-items: center; gap: 10px; width: fit-content; margin-bottom: 22px; color: #bcece6; font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .status-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 5px rgba(100,222,210,.1); }
+    .hero h1 { margin-bottom: 12px; font-size: clamp(3rem, 6.2vw, 5.5rem); font-weight: 700; line-height: .99; letter-spacing: -.065em; }
+    .hero h1 span { display: block; color: var(--teal); }
+    .hero-title { margin-bottom: 20px; color: #d7e3f0; font: 500 clamp(1.04rem, 2vw, 1.34rem)/1.5 "Space Grotesk", sans-serif; letter-spacing: -.02em; }
+    .hero-summary { max-width: 610px; margin-bottom: 28px; font-size: 16px; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+    .social-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 8px; color: var(--muted); font-size: 12px; font-weight: 600; transition: color .2s, background .2s; }
+    .social-link:hover { color: var(--teal); background: rgba(255,255,255,.04); }
+    .social-link svg { width: 16px; height: 16px; }
+    .hero-art { position: relative; display: grid; place-items: center; min-height: 400px; }
+    .art-glow { position: absolute; width: 82%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(100,222,210,.14), rgba(115,145,232,.08) 42%, transparent 70%); filter: blur(10px); }
+    .art-orbit { position: absolute; width: 100%; max-width: 400px; aspect-ratio: 1; border: 1px solid rgba(140,186,255,.2); border-radius: 50%; transform: rotate(-18deg) scaleY(.79); }
+    .art-orbit::before, .art-orbit::after { content: ""; position: absolute; border: 1px dashed rgba(100,222,210,.23); border-radius: 50%; inset: 10%; transform: rotate(49deg) scaleY(.8); }
+    .art-orbit::after { inset: 22%; border-color: rgba(255,202,120,.24); transform: rotate(-35deg) scaleY(.74); }
+    .logo-frame { position: relative; display: grid; place-items: center; width: min(70%, 280px); aspect-ratio: 1; border: 1px solid rgba(255,255,255,.14); border-radius: 36px; background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.025)); box-shadow: 0 35px 100px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.1); transform: rotate(-4deg); }
+    .logo-frame img { width: 78%; height: 78%; object-fit: contain; filter: drop-shadow(0 14px 28px rgba(0,0,0,.4)); transform: rotate(4deg); }
+    .float-label { position: absolute; display: flex; align-items: center; gap: 9px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 12px; background: rgba(14,29,46,.9); box-shadow: 0 12px 32px rgba(0,0,0,.22); color: #dbe7f3; font-size: 12px; font-weight: 600; backdrop-filter: blur(10px); }
+    .float-label svg { width: 17px; height: 17px; color: var(--teal); }
+    .float-one { top: 11%; left: 0; }
+    .float-two { right: -1%; bottom: 17%; }
+    .hero-topics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .hero-topics .chip:nth-child(3n + 1) { border-color: rgba(100,222,210,.2); }
+    .hero-topics .chip:nth-child(3n + 2) { border-color: rgba(140,186,255,.2); }
+    .hero-topics .chip:nth-child(3n) { border-color: rgba(255,202,120,.2); }
+    .signal-strip { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 42px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.025); }
+    .signal { padding: 17px 20px; }
+    .signal + .signal { border-left: 1px solid var(--line); }
+    .signal strong { display: block; margin-bottom: 2px; font: 600 14px "Space Grotesk", sans-serif; }
+    .signal span { color: var(--subtle); font-size: 11.5px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); gap: 52px; align-items: start; }
+    .prose p { margin-bottom: 17px; font-size: 15.5px; }
+    .prose strong { color: var(--text); font-weight: 600; }
+    .profile-points { display: grid; gap: 12px; }
+    .profile-point { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: rgba(255,255,255,.025); }
+    .point-icon { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(100,222,210,.2); border-radius: 12px; color: var(--teal); background: rgba(100,222,210,.07); }
+    .point-icon svg { width: 20px; height: 20px; }
+    .profile-point h3 { margin: 2px 0 5px; font-size: 15px; letter-spacing: -.02em; }
+    .profile-point p { margin: 0; font-size: 13px; line-height: 1.6; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .skill-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.025); }
+    .skill-head { display: flex; align-items: center; gap: 12px; margin-bottom: 17px; }
+    .skill-icon { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 12px; color: var(--blue); background: rgba(140,186,255,.09); border: 1px solid rgba(140,186,255,.16); }
+    .skill-card:nth-child(2) .skill-icon { color: var(--teal); background: rgba(100,222,210,.08); border-color: rgba(100,222,210,.16); }
+    .skill-card:nth-child(3) .skill-icon { color: var(--amber); background: rgba(255,202,120,.08); border-color: rgba(255,202,120,.16); }
+    .skill-icon svg { width: 20px; height: 20px; }
+    .skill-head h3 { margin: 0; font-size: 16px; }
+    .skill-card .chip { margin: 0 2px 6px 0; }
+
+    /* Experience */
+    .timeline { position: relative; display: grid; gap: 16px; padding-left: 28px; }
+    .timeline::before { content: ""; position: absolute; top: 12px; bottom: 20px; left: 7px; width: 2px; background: linear-gradient(var(--teal), rgba(140,186,255,.22), rgba(255,202,120,.35)); }
+    .job { position: relative; padding: 25px 28px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); transition: border-color .2s, transform .2s; }
+    .job:hover { border-color: var(--line-strong); transform: translateX(3px); }
+    .job::before { content: ""; position: absolute; top: 30px; left: -28px; width: 14px; height: 14px; border: 3px solid var(--bg); border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 1px rgba(100,222,210,.5); }
+    .job-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 7px; }
+    .job h3 { margin: 0; font-size: 18px; }
+    .job-date { flex: none; padding: 5px 10px; border: 1px solid rgba(100,222,210,.2); border-radius: 999px; color: #bcece6; background: rgba(100,222,210,.05); font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .job-org { margin-bottom: 13px; color: var(--blue); font-size: 13.5px; font-weight: 600; }
+    .job-org span { color: var(--subtle); font-weight: 400; }
+    .job ul { display: grid; gap: 7px; margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+    .job li { padding-left: 2px; }
+    .job li::marker { color: var(--teal); }
+
+    /* Projects */
+    .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+    .project { display: flex; flex-direction: column; min-height: 100%; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); transition: transform .22s var(--ease), border-color .22s ease, background .22s ease; }
+    .project:hover { transform: translateY(-4px); border-color: var(--line-strong); background: linear-gradient(150deg, rgba(100,222,210,.065), rgba(255,255,255,.02)); }
+    .project-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .project-meta::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--teal); transform: rotate(45deg); }
+    .project h3 { margin-bottom: 12px; font-size: 19px; }
+    .project p { margin-bottom: 13px; font-size: 13.5px; line-height: 1.75; }
+    .project .chips { margin: auto 0 17px; padding-top: 8px; }
+    .project-link { display: inline-flex; align-items: center; gap: 8px; width: fit-content; color: var(--teal); font-size: 12px; font-weight: 700; overflow-wrap: anywhere; }
+    .project-link svg { width: 15px; height: 15px; transition: transform .2s ease; }
+    .project-link:hover svg { transform: translate(2px,-2px); }
+
+    /* Education + publication + languages */
+    .education-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .education-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.025); }
+    .education-date { display: inline-flex; margin-bottom: 17px; padding: 5px 10px; border-radius: 999px; color: var(--amber); background: rgba(255,202,120,.07); border: 1px solid rgba(255,202,120,.17); font-size: 11px; font-weight: 700; }
+    .education-card h3 { margin-bottom: 10px; font-size: 17px; }
+    .education-school { margin-bottom: 7px; color: var(--teal); font-size: 13.5px; font-weight: 700; }
+    .education-meta { margin-bottom: 0; color: var(--subtle); font-size: 12.5px; }
+    .publication { position: relative; padding: clamp(24px, 4vw, 42px); border: 1px solid rgba(140,186,255,.24); border-radius: var(--radius); background: linear-gradient(110deg, rgba(140,186,255,.09), rgba(100,222,210,.045) 60%, rgba(255,202,120,.04)); overflow: hidden; }
+    .publication::after { content: ""; position: absolute; width: 250px; height: 250px; right: -100px; top: -130px; border-radius: 50%; background: radial-gradient(circle, rgba(140,186,255,.17), transparent 70%); pointer-events: none; }
+    .publication-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 22px; align-items: start; }
+    .publication-icon { display: grid; place-items: center; width: 54px; height: 54px; border: 1px solid rgba(140,186,255,.22); border-radius: 15px; color: var(--blue); background: rgba(140,186,255,.08); }
+    .publication-icon svg { width: 25px; height: 25px; }
+    .publication-journal { margin-bottom: 9px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .publication h3 { margin-bottom: 12px; font-size: clamp(1.25rem, 2.5vw, 1.65rem); }
+    .publication p { max-width: 760px; margin-bottom: 19px; font-size: 14px; }
+    .languages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 42px; }
+    .language { padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: rgba(255,255,255,.025); }
+    .language strong { display: block; margin-bottom: 3px; font: 600 15px "Space Grotesk", sans-serif; }
+    .language span { color: var(--muted); font-size: 12.5px; }
+
+    /* Contact + footer */
+    .contact-panel { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 38px; padding: clamp(24px, 4vw, 42px); border: 1px solid var(--line-strong); border-radius: 24px; background: linear-gradient(125deg, rgba(100,222,210,.075), rgba(140,186,255,.035) 68%, rgba(255,255,255,.02)); }
+    .contact-panel h2 { margin-bottom: 13px; font-size: clamp(2rem, 3.7vw, 2.8rem); }
+    .contact-panel p { margin-bottom: 0; font-size: 14px; }
+    .contact-items { display: grid; gap: 10px; align-content: center; }
+    .contact-item { display: flex; align-items: center; gap: 13px; min-width: 0; padding: 13px 15px; border: 1px solid var(--line); border-radius: 13px; background: rgba(6,16,28,.25); transition: border-color .2s, background .2s; }
+    a.contact-item:hover { border-color: var(--line-strong); background: rgba(100,222,210,.05); }
+    .contact-item > svg { width: 19px; height: 19px; flex: none; color: var(--teal); }
+    .contact-copy { min-width: 0; }
+    .contact-label { display: block; margin-bottom: 1px; color: var(--subtle); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .contact-value { display: block; color: var(--text); font-size: 13px; overflow-wrap: anywhere; }
+    footer { padding: 35px 0 28px; border-top: 1px solid var(--line); background: rgba(2,8,14,.18); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .footer-brand { display: flex; align-items: center; gap: 11px; }
+    .footer-brand img { width: 34px; height: 34px; object-fit: contain; }
+    .footer-brand span { color: var(--muted); font-size: 12px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    .footer-links a { color: var(--muted); font-size: 12px; transition: color .2s; }
+    .footer-links a:hover { color: var(--teal); }
+    .copyright { margin: 20px 0 0; color: var(--subtle); font-size: 11px; }
+    .to-top { position: fixed; right: 22px; bottom: 22px; z-index: 800; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-strong); border-radius: 13px; color: var(--teal); background: rgba(12,26,41,.92); box-shadow: 0 8px 24px rgba(0,0,0,.18); cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .2s, visibility .2s, transform .2s; }
+    .to-top.show { opacity: 1; visibility: visible; transform: none; }
+    .to-top svg { width: 19px; height: 19px; }
+
+    @media (max-width: 1000px) {
+      .nav-links a { padding-inline: 9px; font-size: 12px; }
+      .brand { min-width: 155px; }
+      .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(240px, .7fr); gap: 28px; }
+      .hero-art { min-height: 330px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .project:last-child { grid-column: 1 / -1; }
+      .education-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .education-card:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 760px) {
+      :root { --nav-height: 68px; }
+      .wrap { width: min(var(--max-width), calc(100% - 36px)); }
+      .menu-toggle { display: inline-flex; }
+      .nav-links { position: absolute; top: calc(var(--nav-height) - 2px); left: 18px; right: 18px; display: grid; gap: 3px; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: rgba(9,19,32,.98); box-shadow: 0 22px 60px rgba(0,0,0,.4); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .18s, visibility .18s, transform .18s; }
+      .nav-links.open { opacity: 1; visibility: visible; transform: none; }
+      .nav-links a, .nav-links a.nav-contact { padding: 12px 14px; border-radius: 10px; font-size: 14px; }
+      .nav-links a.active { box-shadow: inset 3px 0 0 var(--teal); }
+      section { padding: 76px 0; }
+      .hero { min-height: auto; padding: calc(var(--nav-height) + 44px) 0 54px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 27px; }
+      .hero-copy { order: 2; }
+      .hero-art { order: 1; min-height: 270px; }
+      .art-orbit { width: 270px; }
+      .logo-frame { width: 180px; border-radius: 28px; }
+      .float-one { top: 8%; left: 8%; }
+      .float-two { right: 7%; bottom: 8%; }
+      .hero h1 { font-size: clamp(2.85rem, 12vw, 4.5rem); }
+      .hero-summary { font-size: 15px; }
+      .signal-strip { margin-top: 31px; }
+      .signal { padding: 13px; }
+      .signal strong { font-size: 12px; }
+      .signal span { font-size: 10px; }
+      .about-grid { grid-template-columns: 1fr; gap: 22px; }
+      .profile-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .profile-point { grid-template-columns: 1fr; padding: 15px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .job { padding: 21px 18px; }
+      .job-top { flex-direction: column; gap: 9px; }
+      .job-date { order: -1; }
+      .timeline { padding-left: 23px; }
+      .job::before { left: -23px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project:last-child { grid-column: auto; }
+      .education-grid { grid-template-columns: 1fr; }
+      .education-card:last-child { grid-column: auto; }
+      .contact-panel { grid-template-columns: 1fr; gap: 24px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 460px) {
+      .brand-role { display: none; }
+      .brand img { width: 37px; height: 37px; }
+      .brand { min-width: 0; }
+      .hero-actions { display: grid; grid-template-columns: 1fr; }
+      .hero-actions .btn { width: 100%; }
+      .social-links { gap: 3px; }
+      .social-link { padding-inline: 7px; }
+      .signal-strip { grid-template-columns: 1fr; }
+      .signal + .signal { border-left: 0; border-top: 1px solid var(--line); }
+      .profile-points { grid-template-columns: 1fr; }
+      .profile-point { grid-template-columns: 42px 1fr; }
+      .publication-inner { grid-template-columns: 1fr; gap: 14px; }
+      .languages { grid-template-columns: 1fr; margin-top: 28px; }
+      .section-title { font-size: 2rem; }
+      .to-top { right: 14px; bottom: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#home" aria-label="Ali Bavarchee — home">
+        <img src="Ali_logo.png" alt="" width="42" height="42">
+        <span class="brand-copy">
+          <span class="brand-name">Ali Bavarchee</span>
+          <span class="brand-role">Data Physicist · ML Engineer</span>
+        </span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#publication">Research</a>
+        <a class="nav-contact" href="#contact">Contact</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="hero-kicker"><span class="status-dot" aria-hidden="true"></span> Open to ML / Data Science roles</div>
+            <h1 id="hero-title">Ali <span>Bavarchee</span></h1>
+            <p class="hero-title">Data Physicist · Machine Learning Engineer · Data Scientist</p>
+            <p class="hero-summary">I build deep-learning and statistical pipelines that turn complex, high-dimensional scientific data into reliable, interpretable results — from particle-detector signals to multi-horizon time-series forecasting.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">Explore selected work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="btn btn-secondary" href="mailto:ali.bavarchee@cern.ch">Contact me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+            <div class="social-links" aria-label="Professional profiles">
+              <a class="social-link" href="https://github.com/AliBavarchee" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7a11.3 11.3 0 0 0-3.58 22.02c.57.1.78-.25.78-.55v-2.1c-3.17.69-3.84-1.35-3.84-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.25.73-1.54-2.53-.29-5.19-1.27-5.19-5.65 0-1.25.45-2.27 1.18-3.07-.12-.3-.51-1.46.11-3.04 0 0 .96-.31 3.12 1.17a10.86 10.86 0 0 1 5.68 0c2.17-1.48 3.12-1.17 3.12-1.17.62 1.58.23 2.74.12 3.04.73.8 1.17 1.82 1.17 3.07 0 4.39-2.66 5.36-5.2 5.64.41.36.77 1.05.77 2.12v3.12c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z"/></svg>GitHub</a>
+              <a class="social-link" href="https://linkedin.com/in/ali-bavarchee" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>LinkedIn</a>
+              <a class="social-link" href="https://orcid.org/0000-0001-7880-4525" target="_blank" rel="noopener noreferrer" aria-label="ORCID (opens in a new tab)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0ZM7.37 18.2H5.7V8.03h1.67V18.2ZM6.53 6.9a1.03 1.03 0 1 1 0-2.06 1.03 1.03 0 0 1 0 2.06Zm12.4 11.3h-1.67v-4.95c0-1.18-.02-2.7-1.64-2.7-1.65 0-1.9 1.29-1.9 2.62v5.03h-1.67V8.03h1.6v1.39h.03c.22-.42.77-1.18 1.7-1.18 1.83 0 3.55 1.2 3.55 3.77v6.19Z"/></svg>ORCID</a>
+              <a class="social-link" href="https://inspirehep.net/authors/3199823" target="_blank" rel="noopener noreferrer" aria-label="INSPIRE-HEP (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" stroke-linecap="round"/></svg>INSPIRE-HEP</a>
+            </div>
+            <div class="hero-topics" aria-label="Main research areas">
+              <span class="chip">Scientific machine learning</span><span class="chip">High-energy physics</span><span class="chip">Time-series forecasting</span><span class="chip">Reproducible analysis</span>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Personal logo artwork">
+            <div class="art-glow"></div><div class="art-orbit"></div>
+            <div class="logo-frame"><img src="Ali_logo.png" alt="Ali Bavarchee personal emblem" width="280" height="280"></div>
+            <div class="float-label float-one"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.8 12h16.4M12 3.5c2.8 2.7 2.8 14.3 0 17M12 3.5c-2.8 2.7-2.8 14.3 0 17"/></svg>Scientific data</div>
+            <div class="float-label float-two"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5M4 19h17M7 15l4-5 3 2 5-7" stroke-linecap="round" stroke-linejoin="round"/></svg>Learning systems</div>
+          </div>
+        </div>
+        <div class="signal-strip" aria-label="Research collaborations">
+          <div class="signal"><strong>LHCb</strong><span>Particle reconstruction & identification</span></div>
+          <div class="signal"><strong>Belle II</strong><span>Detector observables & classification</span></div>
+          <div class="signal"><strong>ICARUS</strong><span>Neutrino-event classification</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Professional profile</div>
+          <h2 class="section-title" id="about-title">Physics-grade rigour.<br><span class="accent">Practical machine learning.</span></h2>
+          <p class="section-intro">A research-driven approach to building models that are measurable, interpretable, and reliable.</p>
+        </div>
+        <div class="about-grid">
+          <div class="prose">
+            <p>I'm a <strong>Machine Learning and Data Science specialist</strong> with an M.Sc. in Physics of Data and experience developing ML solutions for complex, high-dimensional scientific datasets.</p>
+            <p>My work spans <strong>supervised learning, deep learning, feature engineering, classification, time-series forecasting, statistical analysis, and scientific computing</strong> — including contributions to major particle-physics experiments.</p>
+            <p>I work with Python, PyTorch, TensorFlow/Keras, scikit-learn, LightGBM, and C++, combining rigorous evaluation with domain understanding to turn data into useful evidence.</p>
+          </div>
+          <div class="profile-points">
+            <article class="profile-point">
+              <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+              <div><h3>High-dimensional data</h3><p>Detector-level feature engineering and sparse pattern recognition.</p></div>
+            </article>
+            <article class="profile-point">
+              <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8M14 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div><h3>Forecasting & time series</h3><p>Multiscale, multi-horizon pipelines with leakage-safe validation.</p></div>
+            </article>
+            <article class="profile-point">
+              <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 3 8 4v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7l8-4Z" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div><h3>Reproducible pipelines</h3><p>End-to-end training, validation, and model-evaluation workflows.</p></div>
+            </article>
+            <article class="profile-point">
+              <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3" stroke-linecap="round"/></svg></div>
+              <div><h3>Scientific computing</h3><p>ROOT, GEANT4, Basf2, and C++ tooling for experimental analysis.</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Technical skills</div>
+          <h2 class="section-title" id="skills-title">Tools for turning data into evidence.</h2>
+          <p class="section-intro">A grouped view of the frameworks, methods, and scientific software used across my work.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-head"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke-linecap="round"/></svg></div><h3>Machine learning & AI</h3></div>
+            <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">scikit-learn</span><span class="chip">LightGBM</span><span class="chip">Neural networks</span><span class="chip">CNNs</span><span class="chip">Autoencoders</span><span class="chip">Classification</span><span class="chip">Regression</span><span class="chip">Ensemble learning</span><span class="chip">Feature extraction</span><span class="chip">Model evaluation</span></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-head"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 20h18M6 20V11M12 20V4M18 20v-6" stroke-linecap="round"/></svg></div><h3>Data science & forecasting</h3></div>
+            <div class="chips"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">SciPy</span><span class="chip">Exploratory analysis</span><span class="chip">Statistical modelling</span><span class="chip">Dimensionality reduction</span><span class="chip">Time-series analysis</span><span class="chip">ARIMA</span><span class="chip">Multi-horizon forecasting</span><span class="chip">Lag features</span><span class="chip">Rolling statistics</span><span class="chip">Technical indicators</span><span class="chip">Data visualisation</span></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-head"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Programming & scientific tools</h3></div>
+            <div class="chips"><span class="chip">C++</span><span class="chip">Julia</span><span class="chip">R</span><span class="chip">MATLAB</span><span class="chip">Bash / Shell</span><span class="chip">ROOT</span><span class="chip">GEANT4</span><span class="chip">Basf2</span><span class="chip">LHCb Moore / DaVinci / Allen</span><span class="chip">Jupyter</span><span class="chip">Git / GitHub</span><span class="chip">Simulink</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Experience</div>
+          <h2 class="section-title" id="experience-title">Research across experiments.</h2>
+          <p class="section-intro">From particle-identification models to quality assurance and process optimisation.</p>
+        </div>
+        <div class="timeline">
+          <article class="job">
+            <div class="job-top"><h3>Machine Learning Researcher</h3><span class="job-date">2024 — Present</span></div>
+            <div class="job-org">LHCb Collaboration</div>
+            <ul><li>Develop deep-learning models for particle identification, pattern recognition, and classification using detector data.</li><li>Build preprocessing, feature-engineering, training, validation, and performance-evaluation pipelines.</li><li>Investigate calorimeter energy maps and sparse spatial patterns for high-throughput particle reconstruction environments.</li></ul>
+          </article>
+          <article class="job">
+            <div class="job-top"><h3>Machine Learning Researcher — Particle Identification</h3><span class="job-date">2022 — 2023</span></div>
+            <div class="job-org">Belle II / KEKCC Apprenticeship</div>
+            <ul><li>Developed Boosted Decision Tree and neural-network models for charged-particle identification.</li><li>Combined dE/dx, time-of-flight, and Cherenkov observables within Basf2 and GEANT4 workflows.</li><li>Performed feature engineering, model optimisation, validation, and comparative performance analysis.</li></ul>
+          </article>
+          <article class="job">
+            <div class="job-top"><h3>Machine Learning Researcher — Event Classification</h3><span class="job-date">2020 — 2021</span></div>
+            <div class="job-org">ICARUS / Fermilab</div>
+            <ul><li>Developed ML classifiers for neutrino–muon discrimination using track topology and energy-deposition features.</li><li>Focused on background rejection, signal purity, and robust classification in complex experimental data.</li></ul>
+          </article>
+          <article class="job">
+            <div class="job-top"><h3>Quality Controller</h3><span class="job-date">2018 — 2019</span></div>
+            <div class="job-org">Terraco / Sure Level <span>· Tehran, Iran</span></div>
+            <ul><li>Worked on quality assurance, process monitoring, problem identification, and process optimisation.</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Selected projects</div>
+          <h2 class="section-title" id="projects-title">Ideas, models, and working pipelines.</h2>
+          <p class="section-intro">Applied work across time-series modelling and particle-physics data.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-meta">2025 — 2026 · Time series</div>
+            <h3>Hybrid Multi-Horizon Cryptocurrency Forecasting</h3>
+            <p>A multiscale ADA/USDT forecasting pipeline using Python, pandas, NumPy, LightGBM, PyTorch, and statistical models. Features include lagged, rolling, volatility, return, and technical-indicator signals across multiple time resolutions.</p>
+            <p>The hybrid approach combines ARIMA, gradient boosting, convolutional autoencoders, ResNet-based representations, and horizon-specific fusion models, with leakage-safe temporal alignment and strict train/validation/test procedures.</p>
+            <div class="chips"><span class="chip">ARIMA</span><span class="chip">LightGBM</span><span class="chip">PyTorch</span><span class="chip">Autoencoders</span><span class="chip">ResNet</span></div>
+            <a class="project-link" href="https://github.com/AliBavarchee/ada-gaf-fusion" target="_blank" rel="noopener noreferrer">View repository <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <article class="project">
+            <div class="project-meta">2024 — 2026 · Detector ML</div>
+            <h3>Deep Learning for Detector Pattern Recognition</h3>
+            <p>Deep-learning approaches for high-dimensional detector data, combining convolutional architectures, feature extraction, sparse-pattern recognition, and classification for particle identification.</p>
+            <div class="chips"><span class="chip">CNNs</span><span class="chip">Sparse patterns</span><span class="chip">Feature extraction</span><span class="chip">Classification</span></div>
+          </article>
+          <article class="project">
+            <div class="project-meta">2022 — 2024 · Particle ID</div>
+            <h3>Deep Learning for Particle Identification</h3>
+            <p>A hybrid deep-learning framework for particle-identification optimisation using complementary detector observables. This work resulted in a peer-reviewed publication in <em>Computer Physics Communications</em>.</p>
+            <div class="chips"><span class="chip">Hybrid models</span><span class="chip">BDT</span><span class="chip">Neural networks</span><span class="chip">dE/dx · TOF · Cherenkov</span></div>
+            <a class="project-link" href="#publication">Read the publication <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" aria-labelledby="education-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Education</div>
+          <h2 class="section-title" id="education-title">Academic foundation.</h2>
+        </div>
+        <div class="education-grid">
+          <article class="education-card"><div class="education-date">2019 — 2023</div><h3>M.Sc. Physics of Data</h3><div class="education-school">University of Padova</div><p class="education-meta">Department of Physics and Astronomy · Padova, Italy</p></article>
+          <article class="education-card"><div class="education-date">2012 — 2014</div><h3>M.Sc. Elementary Particles &amp; Quantum Field Theory</h3><div class="education-school">IAU — North Tehran Branch</div><p class="education-meta">Department of Physics · Tehran, Iran</p></article>
+          <article class="education-card"><div class="education-date">2006 — 2012</div><h3>B.Sc. Engineering Physics (Plasma)</h3><div class="education-school">IAU — Science and Research Branch</div><p class="education-meta">Plasma Research Center · Tehran, Iran</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATION & LANGUAGES -->
+    <section id="publication" aria-labelledby="publication-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Publication</div>
+          <h2 class="section-title" id="publication-title">Peer-reviewed research.</h2>
+        </div>
+        <article class="publication">
+          <div class="publication-inner">
+            <div class="publication-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z" stroke-linejoin="round"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5Z" stroke-linejoin="round"/><path d="M8 7h7M8 10.5h5" stroke-linecap="round"/></svg></div>
+            <div><div class="publication-journal">Computer Physics Communications · 2024</div><h3>Hybrid Deep Learning Model for PID Optimization</h3><p>A hybrid deep-learning framework for particle-identification optimisation, combining complementary detector observables to improve discrimination performance in high-energy physics experiments.</p><a class="btn btn-secondary" href="https://doi.org/10.1016/j.cpc.2024.109277" target="_blank" rel="noopener noreferrer">Open publication / DOI <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </div>
+        </article>
+        <div class="section-head" style="margin: 42px 0 18px;">
+          <div class="eyebrow">Languages</div>
+          <h2 class="section-title" style="font-size: clamp(1.65rem, 3vw, 2.2rem); margin-bottom: 0;">Communication.</h2>
+        </div>
+        <div class="languages">
+          <div class="language"><strong>English</strong><span>Fluent · Verbal &amp; written</span></div>
+          <div class="language"><strong>Persian</strong><span>Native</span></div>
+          <div class="language"><strong>Italian</strong><span>Basic verbal · Good written</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div><div class="eyebrow">Contact</div><h2 id="contact-title">Let’s build something useful.</h2><p>Open to opportunities and collaborations in machine learning, data science, and scientific computing.</p></div>
+          <div class="contact-items">
+            <a class="contact-item" href="mailto:ali.bavarchee@cern.ch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="contact-copy"><span class="contact-label">Email</span><span class="contact-value">ali.bavarchee@cern.ch</span></span></a>
+            <a class="contact-item" href="tel:+989126842742"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4Z" stroke-linejoin="round"/></svg><span class="contact-copy"><span class="contact-label">Mobile · Iran</span><span class="contact-value">+98 912 684 2742</span></span></a>
+            <a class="contact-item" href="tel:+393513238388"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4Z" stroke-linejoin="round"/></svg><span class="contact-copy"><span class="contact-label">Mobile · Italy</span><span class="contact-value">+39 351 323 8388</span></span></a>
+            <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg><span class="contact-copy"><span class="contact-label">Location</span><span class="contact-value">Tehran, Iran</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <a class="footer-brand" href="#home"><img src="Ali_logo.png" alt="" width="34" height="34"><span>Ali Bavarchee · Data Physicist &amp; ML Engineer</span></a>
+        <nav class="footer-links" aria-label="Footer links"><a href="https://github.com/AliBavarchee" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://linkedin.com/in/ali-bavarchee" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://orcid.org/0000-0001-7880-4525" target="_blank" rel="noopener noreferrer">ORCID</a><a href="https://inspirehep.net/authors/3199823" target="_blank" rel="noopener noreferrer">INSPIRE-HEP</a><a href="mailto:ali.bavarchee@cern.ch">Email</a></nav>
+      </div>
+      <p class="copyright">© <span id="year"></span> Ali Bavarchee. Built around research, reproducibility, and useful models.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
+  <script>
+    (() => {
+      const header = document.getElementById('siteHeader');
+      const progress = document.getElementById('progress');
+      const toTop = document.getElementById('toTop');
+      const toggle = document.getElementById('menuToggle');
+      const nav = document.getElementById('navLinks');
+      const navItems = [...nav.querySelectorAll('a[href^="#"]')];
+      const sections = [...document.querySelectorAll('main section[id]')];
+      let scrollQueued = false;
+
+      const updateScrollUI = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = `${maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0}%`;
+        header.classList.toggle('scrolled', scrollTop > 12);
+        toTop.classList.toggle('show', scrollTop > 520);
+        scrollQueued = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!scrollQueued) {
+          window.requestAnimationFrame(updateScrollUI);
+          scrollQueued = true;
+        }
+      }, { passive: true });
+      window.addEventListener('resize', updateScrollUI, { passive: true });
+      updateScrollUI();
+
+      const closeMenu = () => {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+      };
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      });
+      navItems.forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
+      });
+      document.addEventListener('click', event => {
+        if (nav.classList.contains('open') && !nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+      });
+
+      if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            navItems.forEach(link => {
+              const matches = link.getAttribute('href') === `#${entry.target.id}`;
+              link.classList.toggle('active', matches);
+              if (matches) link.setAttribute('aria-current', 'location');
+              else link.removeAttribute('aria-current');
+            });
+          });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        sections.forEach(section => sectionObserver.observe(section));
+      }
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
